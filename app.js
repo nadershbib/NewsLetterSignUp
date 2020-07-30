@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const app = express()
 app.use(express.static("public"));
@@ -13,7 +14,7 @@ app.get("/",(req,res)=>{
     res.sendFile(__dirname+"/index.html");
 })
 
-
+console.log(process.env.MAILCHIMP_API_KEY )
 app.post("/",(req,res)=>{
 
     const firstName= req.body.fname;
@@ -46,7 +47,7 @@ app.post("/",(req,res)=>{
      const url="https://us17.api.mailchimp.com/3.0/lists/6e4ca868b6";
      const options = {
          method:'POST',
-         auth:"nader1:10f951327cc1437e271d2fdbdc1ffd76-us17"
+         auth:process.env.MAILCHIMP_API_KEY
      }
      const request = https.request(url,options,(response)=>{
              
